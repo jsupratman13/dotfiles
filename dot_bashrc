@@ -127,5 +127,6 @@ export LD_LIBRARY_PATH="/usr/local/cuda/lib64:$LD_LIBRARY_PATH"
 
 # ROS
 source /opt/ros/noetic/setup.bash
+source /usr/lib/python3/dist-packages/catkin_tools/verbs/catkin_shell_verbs.bash
 export LIBGL_ALWAYS_SOFTWARE=1
 source ~/ros/devel/setup.bash
