@@ -1,0 +1,8 @@
+[init]
+	templatedir = ~/.git_template
+[core]
+	hooksPath = ~/.git_template/hooks
+	editor = vim
+[user]
+	email = supratmanjoshua@gmail.com
+	name = jsupratman13

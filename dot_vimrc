@@ -1,0 +1,92 @@
+"plugin manager
+call plug#begin('~/.vim/plugged')
+Plug 'Yggdroot/indentLine' "indent line
+Plug 'preservim/nerdcommenter' "smart way to comment stuff
+Plug 'altercation/vim-colors-solarized' "colorscheme
+Plug 'Townk/vim-autoclose' "autoclose bracket
+Plug 'kannokanno/previm' "markdown preview
+Plug 'tyru/open-browser.vim' "enable browser open from vim
+Plug 'miyakogi/seiya.vim' "control transparency
+Plug 'alvan/vim-closetag' "auto close tag for html etc
+Plug 'vim-airline/vim-airline' "colorscheme for vim status line
+Plug 'vim-airline/vim-airline-themes' "colorscheme for vim status line
+Plug 'prabirshrestha/vim-lsp' "vim language server
+Plug 'mattn/vim-lsp-settings' "vim language server auto settings
+Plug 'taketwo/vim-ros' "ROS vim plugin
+Plug 'ntpeters/vim-better-whitespace' "remove trailing whitespace
+Plug 'fisadev/vim-isort' "sort python imports
+call plug#end()
+
+"text rendering options
+set encoding=utf-8 "use utf-8 encoding on vim
+set fileformats=unix,mac,dos "auto detect line ending characters
+set fileencodings=utf-8,iso-2022-jp-3,euc-jisx0213,cp932,euc-jp,sjis,jis,latin,iso-2022-jp "encoding type for opening file (character)
+
+"indent options
+set autoindent "new lines inherit the indentation of previous lines
+set smartindent "new lines inherit the indentation of depending on blocks
+set tabstop=4 "tab is n spaces
+set softtabstop=4 "<tab> key is n spaces
+set shiftwidth=4 "when shifting indent using n spaces
+set expandtab "convert tab to spaces
+
+"user interface options
+set mouse=a "use mouse on all modes
+set showtabline=1 "show tab bar only when opening more 2+ files with vim tab page
+set laststatus=2 "show vim status line always
+set t_Co=256 "enable 256 colors on vim
+set title "set window title to reflect current file
+set number "show line number
+set wrap "long lines are given linebreaks
+
+"letter/word search options
+set ignorecase "disable strict case search
+set smartcase "lower case letter search include capital letter but capital letter search only capital letter
+
+"color scheme
+syntax on
+set background=dark " use colors that suit dark background
+colorscheme solarized
+
+"cursor options
+set ruler "show cursor position
+set cursorline "show cursor line
+highlight CursorLine cterm=underline ctermfg=NONE ctermbg=None
+
+"load specific plugin and indent settings for certain filetype
+filetype plugin indent on
+
+"mtpeters/vim-better-whitepace plugin options
+let g:better_whitespace_enabled=1
+let g:strip_whitelines_at_eof=1
+let g:strip_whitespace_on_save=1
+let g:strip_whitespace_confirm=0
+
+"miyakogi/seiya plugin options
+let g:seiya_auto_enable=1 "enable transparency
+
+"preservim/nerdcommenter options
+let g:NERDDefaultAlign='left' "Left align
+
+"fisadev/vim-isort plugin options
+let g:vim_isort_config_overrides = {'line_length': 119, 'force_single_line': 'True'}
+
+"vim-airline/vim-airline plugin options
+let g:airline_theme='solarized'
+let g:airline_solarized_bg='dark'
+
+"vim-lsp plugin options (make sure to apt install awesome font)
+let g:lsp_diagnostics_signs_error = {'text': ''}
+let g:lsp_diagnostics_signs_warning = {'text': ''}
+let g:lsp_diagnostics_signs_hint= {'text': '?'}
+let g:lsp_diagnostics_echo_cursor=1
+
+"have vim-lsp use efm-langserver
+augroup LspEFM
+  au!
+  autocmd User lsp_setup call lsp#register_server({
+      \ 'name': 'efm-langserver',
+      \ 'cmd': {server_info->[expand('$HOME/go/bin/efm-langserver'), '-c', expand('$HOME/.config/efm-langserver/config.yaml')]},
+      \ 'allowlist': ['vim', 'eruby', 'markdown', 'yaml'],
+      \ })
+augroup END
